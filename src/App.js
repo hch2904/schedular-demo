@@ -1,23 +1,53 @@
-import logo from './logo.svg';
 import './App.css';
+
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack';
+import Routes from './routes';
+
+const appTheme = createMuiTheme({
+  // #265ED7
+  palette: {
+    primary: {
+      'main': '#0779e4',
+      'light': '#63a7ff',
+      'dark': '#004eb1',
+      'contrastText': '#FFF',
+    },
+    secondary: {
+      'main': '#0fc1a1',
+      'light': '#60f5d2',
+      'dark': '#009073',
+      'contrastText': '#000',
+    }
+  },
+  typography: {
+    // Use the system font instead of the default Roboto font.
+    fontFamily: [
+      '-apple-system',
+      'Lato',
+      'BlinkMacSystemFont',
+      '"Segoe UI"',
+      '"Helvetica Neue"',
+      'Arial',
+      'sans-serif',
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(','),
+  }
+});
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <ThemeProvider theme={appTheme}>
+        <SnackbarProvider
+          anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
         >
-          Learn React
-        </a>
-      </header>
+          <Routes />
+        </SnackbarProvider>
+      </ThemeProvider>
     </div>
   );
 }
